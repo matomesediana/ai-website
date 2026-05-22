@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, redirect
+import time
+import os
 
 app = Flask(__name__)
 
@@ -6,6 +8,7 @@ messages = []
 
 # Fake AI (no API needed)
 def get_ai_response(text):
+    time.sleep(1)
     return "AI (demo): " + text
 
 @app.route("/", methods=["GET", "POST"])
@@ -22,6 +25,6 @@ def home():
     return render_template("index.html", messages=messages)
 
 if __name__ == "__main__":
-    import os
+    # FIX FOR RENDER DEPLOYMENT
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
